@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Sparkles, Mail, Lock, ArrowRight } from 'lucide-react';
 import { AppContext } from '../App';
+import { apiEndpoints } from '../config/api';
 import toast from 'react-hot-toast';
 
 const Login = ({ redirectTo = '/dashboard' }) => {
@@ -60,23 +61,29 @@ const Login = ({ redirectTo = '/dashboard' }) => {
     setIsLoading(true);
     
     try {
-      // Mock authentication - replace with real API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Try real API first, fallback to mock
+      let userData;
+      try {
+        const response = await apiEndpoints.login(formData);
+        userData = response.user;
+        localStorage.setItem('influencore_token', response.token);
+      } catch (apiError) {
+        console.warn('API login failed, using mock authentication:', apiError.message);
+        
+        // Mock authentication for demo
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        userData = {
+          id: '1',
+          name: 'Demo User',
+          email: formData.email,
+          avatar: null,
+          plan: 'pro',
+          joinedAt: '2024-01-01'
+        };
+        localStorage.setItem('influencore_token', 'mock-jwt-token');
+      }
       
-      // Mock user data
-      const userData = {
-        id: '1',
-        name: 'John Doe',
-        email: formData.email,
-        avatar: null,
-        plan: 'pro',
-        joinedAt: '2024-01-01'
-      };
-      
-      // Store auth data
-      localStorage.setItem('influencore_token', 'mock-jwt-token');
       localStorage.setItem('influencore_user', JSON.stringify(userData));
-      
       setUser(userData);
       toast.success('Welcome back!');
       navigate(redirectTo);
