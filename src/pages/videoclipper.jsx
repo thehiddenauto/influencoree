@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, Scissors, Download, Play } from 'lucide-react';
+import { Upload, Scissors } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const VideoClipper = () => {
@@ -13,7 +13,7 @@ const VideoClipper = () => {
         toast.error('Video size must be less than 100MB');
         return;
       }
-      
+
       const url = URL.createObjectURL(file);
       setUploadedVideo({
         file,
@@ -22,6 +22,15 @@ const VideoClipper = () => {
       });
       toast.success('Video uploaded successfully');
     }
+  };
+
+  const handleClipVideo = () => {
+    if (!uploadedVideo) return;
+    setIsProcessing(true);
+    setTimeout(() => {
+      toast.success('Video clipped successfully!');
+      setIsProcessing(false);
+    }, 2000); // Placeholder for real clipping logic
   };
 
   return (
@@ -34,17 +43,18 @@ const VideoClipper = () => {
       </div>
 
       <div className="grid lg:grid-cols-2 gap-8">
-        <div className="card p-6">
+        {/* Upload Section */}
+        <div className="card p-6 border rounded-lg">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Upload Video</h3>
-          
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+
+          <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center relative">
             <input
               type="file"
               accept="video/*"
               onChange={handleVideoUpload}
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
             />
-            
+
             {uploadedVideo ? (
               <div className="space-y-2">
                 <video
@@ -64,12 +74,24 @@ const VideoClipper = () => {
           </div>
         </div>
 
-        <div className="card p-6">
+        {/* Clipping Section */}
+        <div className="card p-6 border rounded-lg">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Clipping Tools</h3>
-          
+
           <div className="space-y-4">
             <button
-              disabled={!uploadedVideo}
-              className="w-full btn-primary py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={!uploadedVideo || isProcessing}
+              onClick={handleClipVideo}
+              className="w-full btn-primary py-3 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              <Scissors className="
+              <Scissors className="w-5 h-5" />
+              {isProcessing ? 'Processing...' : 'Clip Video'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default VideoClipper;
