@@ -72,4 +72,4 @@ const VideoClipper = () => {
               disabled={!uploadedVideo}
               className="w-full btn-primary py-3 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <Scissors className="w# COMPLETE PRODUCTION DEPLOYMENT FIXES
+              <Scissors className="
