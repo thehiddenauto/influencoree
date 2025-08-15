@@ -10,7 +10,7 @@ import {
   Sparkles,
   ChevronDown
 } from 'lucide-react';
-import { appContext } from '../../app';
+import { AppContext } from '../../app';
 import toast from 'react-hot-toast';
 
 const Header = () => {
