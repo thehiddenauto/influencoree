@@ -16,7 +16,7 @@ import {
   Clock,
   Zap
 } from 'lucide-react';
-import { AppContext } from '../App.jsx';
+import { appContext } from '../app.jsx';
 import { apiCall } from '../config/api.js';
 
 const VideoGenerator = () => {
