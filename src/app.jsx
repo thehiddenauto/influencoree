@@ -5,7 +5,7 @@ import { initializeApi } from './config/api.js';
 import home from './pages/home.jsx';
 import dashboard from './pages/dashboard.jsx';
 import generator from './pages/generator.jsx';
-import videocliPPER from './pages/videoclipper.jsx';
+import videoclipper from './pages/videoclipper.jsx';
 import advancedvideogenerator from './pages/advancedvideogenerator.jsx';
 import library from './pages/library.jsx';
 import profilesettings from './pages/profilesettings.jsx';
