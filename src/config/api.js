@@ -1,35 +1,38 @@
 // API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://backendnew-lz1u.onrender.com';
 
-// Remove /api prefix since it should be in the base URL
+// API endpoints configuration
 export const API_ENDPOINTS = {
   HEALTH: `${API_BASE_URL}/health`,
-  GENERATE_TEXT: `${API_BASE_URL}/generate-text`,
-  GENERATE_VIDEO: `${API_BASE_URL}/generate-video`,
-  GENERATE_VEO3_VIDEO: `${API_BASE_URL}/generate-veo3`,
-  GENERATE_SORA_VIDEO: `${API_BASE_URL}/generate-sora`,
-  GENERATE_VIRAL_SHORT: `${API_BASE_URL}/generate-viral`,
-  GENERATE_VIDEO_FROM_IMAGE: `${API_BASE_URL}/generate-video-from-image`,
-  UPLOAD_VIDEO: `${API_BASE_URL}/upload-video`,
-  CLIP_VIDEO: `${API_BASE_URL}/clip-video`,
-  USER_PROFILE: `${API_BASE_URL}/user/profile`,
-  AUTH_LOGIN: `${API_BASE_URL}/auth/login`,
-  AUTH_SIGNUP: `${API_BASE_URL}/auth/signup`,
-  AUTH_LOGOUT: `${API_BASE_URL}/auth/logout`,
-  BILLING: `${API_BASE_URL}/billing`,
-  SOCIAL_CONNECT: `${API_BASE_URL}/social/connect`,
-  LIBRARY: `${API_BASE_URL}/library`,
-  ANALYTICS: `${API_BASE_URL}/analytics`,
+  GENERATE_TEXT: `${API_BASE_URL}/api/generate-text`,
+  GENERATE_VIDEO: `${API_BASE_URL}/api/generate-video`,
+  GENERATE_VEO3_VIDEO: `${API_BASE_URL}/api/generate-veo3`,
+  GENERATE_SORA_VIDEO: `${API_BASE_URL}/api/generate-sora`,
+  GENERATE_VIRAL_SHORT: `${API_BASE_URL}/api/generate-viral`,
+  GENERATE_VIDEO_FROM_IMAGE: `${API_BASE_URL}/api/generate-video-from-image`,
+  UPLOAD_VIDEO: `${API_BASE_URL}/api/upload-video`,
+  CLIP_VIDEO: `${API_BASE_URL}/api/clip-video`,
+  USER_PROFILE: `${API_BASE_URL}/api/user/profile`,
+  AUTH_LOGIN: `${API_BASE_URL}/api/auth/login`,
+  AUTH_SIGNUP: `${API_BASE_URL}/api/auth/signup`,
+  AUTH_LOGOUT: `${API_BASE_URL}/api/auth/logout`,
+  BILLING: `${API_BASE_URL}/api/billing`,
+  SOCIAL_CONNECT: `${API_BASE_URL}/api/social/connect`,
+  LIBRARY: `${API_BASE_URL}/api/library`,
+  ANALYTICS: `${API_BASE_URL}/api/analytics`,
 };
 
-// Enhanced API client with better error handling
+// Enhanced API client with better error handling and CORS support
 export const apiClient = {
   async request(endpoint, options = {}) {
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
         ...options.headers,
       },
+      mode: 'cors',
+      credentials: 'include',
       ...options,
     };
 
@@ -40,6 +43,8 @@ export const apiClient = {
     }
 
     try {
+      console.log(`API Request: ${options.method || 'GET'} ${endpoint}`);
+      
       const response = await fetch(endpoint, config);
       
       // Handle different response types
@@ -52,6 +57,8 @@ export const apiClient = {
         data = await response.text();
       }
 
+      console.log(`API Response: ${response.status}`, data);
+
       if (!response.ok) {
         // Handle auth errors
         if (response.status === 401) {
@@ -61,7 +68,12 @@ export const apiClient = {
           throw new Error('Authentication required');
         }
         
-        throw new Error(data.message || data.error || `HTTP error! status: ${response.status}`);
+        // Handle specific error responses
+        const errorMessage = typeof data === 'object' && data ? 
+          (data.message || data.error || data.details) : 
+          data || `HTTP error! status: ${response.status}`;
+          
+        throw new Error(errorMessage);
       }
       
       return data;
@@ -70,7 +82,12 @@ export const apiClient = {
       
       // Handle network errors
       if (error.name === 'TypeError' && error.message.includes('fetch')) {
-        throw new Error('Network error. Please check your connection.');
+        throw new Error('Network error. Please check your connection and try again.');
+      }
+      
+      // Handle CORS errors
+      if (error.message.includes('CORS')) {
+        throw new Error('CORS error. Please contact support if this persists.');
       }
       
       throw error;
@@ -141,6 +158,13 @@ export const apiEndpoints = {
   generateViralShort: (data) => apiClient.post(API_ENDPOINTS.GENERATE_VIRAL_SHORT, data),
   generateVideoFromImage: (data) => apiClient.post(API_ENDPOINTS.GENERATE_VIDEO_FROM_IMAGE, data),
 
+  // Text generation
+  generateText: (data) => apiClient.post(API_ENDPOINTS.GENERATE_TEXT, data),
+
+  // Video processing
+  uploadVideo: (file, metadata) => apiClient.uploadFile(API_ENDPOINTS.UPLOAD_VIDEO, file, metadata),
+  clipVideo: (data) => apiClient.post(API_ENDPOINTS.CLIP_VIDEO, data),
+
   // User profile
   getUserProfile: () => apiClient.get(API_ENDPOINTS.USER_PROFILE),
   updateUserProfile: (data) => apiClient.put(API_ENDPOINTS.USER_PROFILE, data),
@@ -155,6 +179,9 @@ export const apiEndpoints = {
   // Billing
   getBillingInfo: () => apiClient.get(API_ENDPOINTS.BILLING),
   updateBilling: (data) => apiClient.put(API_ENDPOINTS.BILLING, data),
+
+  // Social
+  connectSocial: (platform, data) => apiClient.post(`${API_ENDPOINTS.SOCIAL_CONNECT}/${platform}`, data),
 };
 
 // Health check function with retry logic
@@ -176,7 +203,7 @@ export const checkBackendHealth = async (retries = 3) => {
 
 // Initialize health check on app start
 export const initializeApi = async () => {
-  console.log('🚀 Initializing API connection...');
+  console.log('🚀 Initializing API connection to:', API_BASE_URL);
   const isHealthy = await checkBackendHealth();
   
   if (!isHealthy) {
