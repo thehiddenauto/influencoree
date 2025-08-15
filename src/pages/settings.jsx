@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { User, Mail, Lock, Bell, Palette, Shield, Save } from 'lucide-react';
-import { AppContext } from '../App';
+import { appContext } from '../app';
 import toast from 'react-hot-toast';
 
 const Settings = () => {
