@@ -243,3 +243,48 @@ const Generator = () => {
                 <div className="text-center py-8">
                   <VideoIcon className="w-8 h-8 text-gray-400 mx-auto mb-2" />
                   <p className="text-sm text-gray-600">No videos generated yet</p>
+                  <Link to="/generate" className="text-primary-600 hover:text-primary-700 text-sm font-medium">
+                    Create your first video
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Usage Stats */}
+            <div className="bg-white rounded-xl p-6 border border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Your Plan</h3>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="text-gray-600">Videos this month</span>
+                    <span className="font-medium">3 / 10</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="bg-primary-600 h-2 rounded-full" style={{ width: '30%' }}></div>
+                  </div>
+                </div>
+                
+                <div className="pt-4 border-t border-gray-200">
+                  <Link to="/pricing" className="btn-primary w-full text-center">
+                    Upgrade Plan
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Tips */}
+            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">💡 Pro Tips</h3>
+              <ul className="space-y-2 text-sm text-gray-700">
+                <li>• Use specific, detailed prompts for better results</li>
+                <li>• Try different aspect ratios for various platforms</li>
+                <li>• Include emotions and actions in descriptions</li>
+                <li>• Experiment with different styles and moods</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
