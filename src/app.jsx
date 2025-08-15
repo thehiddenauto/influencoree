@@ -6,7 +6,6 @@ import home from './pages/home.jsx';
 import dashboard from './pages/dashboard.jsx';
 import generator from './pages/generator.jsx';
 import videoclipper from './pages/videoclipper.jsx';
-import library from './pages/library.jsx';
 import profilesettings from './pages/profilesettings.jsx';
 import socialconnector from './pages/socialconnector.jsx';
 import pricing from './pages/pricing.jsx';
