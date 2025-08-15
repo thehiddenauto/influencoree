@@ -1,21 +1,23 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import { initializeApi } from './config/api.js';
-import Home from './pages/Home.jsx';
-import Dashboard from './pages/Dashboard.jsx';
-import Generator from './pages/Generator.jsx';
-import VideoClipper from './pages/VideoClipper.jsx';
-import AdvancedVideoGenerator from './pages/AdvancedVideoGenerator.jsx';
-import Library from './pages/Library.jsx';
-import ProfileSettings from './pages/ProfileSettings.jsx';
-import SocialConnector from './pages/SocialConnector.jsx';
-import Pricing from './pages/Pricing.jsx';
-import Login from './pages/Login.jsx';
-import Signup from './pages/Signup.jsx';
-import Billing from './pages/Billing.jsx';
-import Analytics from './pages/Analytics.jsx';
-import Settings from './pages/Settings.jsx';
-import NotFound from './pages/NotFound.jsx';
+
+import home from './pages/home.jsx';
+import dashboard from './pages/dashboard.jsx';
+import generator from './pages/generator.jsx';
+import videocliPPER from './pages/videoclipper.jsx';
+import advancedvideogenerator from './pages/advancedvideogenerator.jsx';
+import library from './pages/library.jsx';
+import profilesettings from './pages/profilesettings.jsx';
+import socialconnector from './pages/socialconnector.jsx';
+import pricing from './pages/pricing.jsx';
+import login from './pages/login.jsx';
+import signup from './pages/signup.jsx';
+import billing from './pages/billing.jsx';
+import analytics from './pages/analytics.jsx';
+import settings from './pages/settings.jsx';
+import notfound from './pages/notfound.jsx';
+
 
 // Create App Context
 export const AppContext = createContext();
