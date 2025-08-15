@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import App from './App.jsx';
+import App from './app.jsx';  // ✅ FIXED: lowercase 'app' instead of 'App'
 import './index.css';
 
 // Remove loading spinner when React mounts
