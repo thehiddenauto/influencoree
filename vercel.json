@@ -64,7 +64,7 @@
     }
   ],
   "env": {
-    "VITE_API_URL": "https://api.influencore.co",
+    "VITE_API_URL": "https://backendnew-lz1u.onrender.com",
     "VITE_APP_ENV": "production"
   }
 }
