@@ -1,17 +1,11 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import { initializeApi } from './config/api.js';
-
 import home from './pages/home.jsx';
 import dashboard from './pages/dashboard.jsx';
 import generator from './pages/generator.jsx';
 import videoclipper from './pages/videoclipper.jsx';
-import profilesettings from './pages/profilesettings.jsx';
-import socialconnector from './pages/socialconnector.jsx';
-import pricing from './pages/pricing.jsx';
 import login from './pages/login.jsx';
-import signup from './pages/signup.jsx';
-import billing from './pages/billing.jsx';
 import analytics from './pages/analytics.jsx';
 import settings from './pages/settings.jsx';
 import notfound from './pages/notfound.jsx';
