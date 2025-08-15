@@ -288,3 +288,6 @@ const Generator = () => {
     </div>
   );
 };
+
+// ✅ ADD THIS: Default export
+export default Generator;
