@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 import { Eye, EyeOff, Mail, Lock, AlertCircle } from 'lucide-react';
-import { AppContext } from '../App.jsx';
+import { appContext } from '../app.jsx';
 import { apiCall, setAuthToken } from '../config/api.js';
 
 const Login = () => {
