@@ -64,7 +64,6 @@
     }
   ],
   "env": {
-    "VITE_API_URL": "https://backendnew-lz1u.onrender.com",
-    "VITE_APP_ENV": "production"
-  }
+  "VITE_API_URL": "https://backendnew-lz1u.onrender.com",
+  "VITE_APP_ENV": "production"
 }
