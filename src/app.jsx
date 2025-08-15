@@ -3,7 +3,6 @@ import { Routes, Route, Link } from 'react-router-dom';
 import { initializeApi } from './config/api.js';
 import home from './pages/home.jsx';
 import dashboard from './pages/dashboard.jsx';
-import generator from './pages/generator.jsx';
 import videoclipper from './pages/videoclipper.jsx';
 import login from './pages/login.jsx';
 import analytics from './pages/analytics.jsx';
