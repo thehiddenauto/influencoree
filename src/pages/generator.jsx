@@ -287,7 +287,4 @@ const Generator = () => {
       </div>
     </div>
   );
-};
-
-// ✅ ADD THIS: Default export
-export default Generator;
+};export default Generator;
