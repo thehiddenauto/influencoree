@@ -9,8 +9,7 @@ import {
   VideoIcon,
   X
 } from 'lucide-react';
-// ✅ FIXED: Correct import path without .jsx extension
-import { AppContext } from '../app';
+import { AppContext } from '../../app';
 
 const Sidebar = ({ mobile = false }) => {
   const { setSidebarOpen } = useContext(AppContext);
