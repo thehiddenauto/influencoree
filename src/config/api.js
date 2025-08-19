@@ -1,16 +1,9 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+﻿const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
-// API health check and initialization
 export const initializeApi = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/health`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      // Add timeout to prevent hanging
-      signal: AbortSignal.timeout(5000)
-    });
+    console.log('Trying to connect to:', `${API_BASE_URL}/health`);
+    const response = await fetch(`${API_BASE_URL}/health`);
     
     if (response.ok) {
       const data = await response.json();
@@ -26,10 +19,9 @@ export const initializeApi = async () => {
   }
 };
 
-// Enhanced API call function with error handling
 export const apiCall = async (endpoint, options = {}) => {
   const token = localStorage.getItem('influencore_token');
-  
+
   const defaultOptions = {
     headers: {
       'Content-Type': 'application/json',
@@ -37,7 +29,6 @@ export const apiCall = async (endpoint, options = {}) => {
     },
   };
 
-  // Handle FormData (for file uploads)
   if (options.body instanceof FormData) {
     delete defaultOptions.headers['Content-Type'];
   }
@@ -53,20 +44,15 @@ export const apiCall = async (endpoint, options = {}) => {
 
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
-    
-    // Handle non-JSON responses
     const contentType = response.headers.get('content-type');
-    
+
     if (contentType && contentType.includes('application/json')) {
       const data = await response.json();
-      
       if (!response.ok) {
         throw new Error(data.error || `HTTP error! status: ${response.status}`);
       }
-      
       return data;
     } else {
-      // Handle non-JSON responses (like file downloads)
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -78,7 +64,6 @@ export const apiCall = async (endpoint, options = {}) => {
   }
 };
 
-// Authentication helper
 export const setAuthToken = (token, userData) => {
   localStorage.setItem('influencore_token', token);
   localStorage.setItem('influencore_user', JSON.stringify(userData));
