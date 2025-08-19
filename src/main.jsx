@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import App from './app.jsx';  // ✅ FIXED: lowercase 'app' instead of 'App'
+import App from './app.jsx';
 import './index.css';
 
 // Remove loading spinner when React mounts
@@ -13,7 +13,12 @@ if (loadingSpinner) {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true
+      }}
+    >
       <App />
       <Toaster 
         position="top-right"

@@ -405,7 +405,7 @@ const VideoGenerator = () => {
                               key={ratio.id}
                               onClick={() => setAspectRatio(ratio.id)}
                               className={`p-4 text-left rounded-lg border-2 transition-colors ${
-                                style === styleOption.id
+                                aspectRatio === ratio.id
                                   ? 'border-primary-500 bg-primary-50'
                                   : 'border-gray-200 hover:border-primary-300'
                               }`}

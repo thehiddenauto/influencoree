@@ -34,6 +34,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'sans-serif'],
+        display: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-in-out',
@@ -50,4 +51,13 @@ export default {
     },
   },
   plugins: [],
+  safelist: [
+    // Safelist dynamic color classes
+    'bg-blue-100', 'text-blue-600', 'text-blue-700',
+    'bg-red-100', 'text-red-600', 'text-red-700',
+    'bg-green-100', 'text-green-600', 'text-green-700',
+    'bg-purple-100', 'text-purple-600', 'text-purple-700',
+    'bg-orange-100', 'text-orange-600', 'text-orange-700',
+    'border-blue-300', 'border-red-300', 'border-green-300', 'border-purple-300', 'border-orange-300',
+  ]
 }
