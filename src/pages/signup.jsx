@@ -22,7 +22,7 @@ const Signup = () => {
   });
   const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (formData.password !== formData.confirmPassword) {
@@ -69,14 +69,14 @@ const Signup = () => {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
   };
 
-  const passwordStrength = (password: string) => {
+  const passwordStrength = (password) => {
     let strength = 0;
     if (password.length >= 8) strength++;
     if (/[A-Z]/.test(password)) strength++;
@@ -85,7 +85,7 @@ const Signup = () => {
     return strength;
   };
 
-  const getPasswordStrengthText = (strength: number) => {
+  const getPasswordStrengthText = (strength) => {
     switch (strength) {
       case 0:
       case 1: return { text: 'Weak', color: 'text-destructive' };
