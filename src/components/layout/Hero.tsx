@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Play, Sparkles, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -47,9 +48,11 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
           >
-            <Button size="lg" className="bg-gradient-to-r from-primary to-primary-glow hover:opacity-90 px-8 py-4 text-lg">
-              Start Creating Free
-              <ArrowRight className="w-5 h-5 ml-2" />
+            <Button size="lg" className="bg-gradient-to-r from-primary to-primary-glow hover:opacity-90 px-8 py-4 text-lg" asChild>
+              <Link to="/signup">
+                Start Creating Free
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
             </Button>
             <Button variant="outline" size="lg" className="px-8 py-4 text-lg group">
               <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
@@ -89,4 +92,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Hero;  
