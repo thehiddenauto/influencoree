@@ -1,8 +1,8 @@
 import React from 'react'
-import { useAuthContext } from '@/components/auth/AuthProvider'
-import { LoginForm } from '@/components/auth/LoginForm'
-import { Dashboard } from '@/components/dashboard/Dashboard'
-import { Navbar } from '@/components/layout/Navbar'
+import { useAuthContext } from '@/components/auth/authprovider'
+import { LoginForm } from '@/components/auth/loginform'
+import { Dashboard } from '@/components/dashboard/dashboard'
+import { Navbar } from '@/components/layout/navbar'
 import { Skeleton } from '@/components/ui/skeleton'
 
 const Index = () => {

@@ -1,15 +1,15 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import { initializeApi } from './config/api.js';
-import Home from './pages/home.jsx';
-import Dashboard from './pages/dashboard.jsx';
-import VideoClipper from './pages/videoclipper.jsx';
-import Login from './pages/login.jsx';
-import Analytics from './pages/analytics.jsx';
-import Settings from './pages/settings.jsx';
-import NotFound from './pages/notfound.jsx';
-import VideoGenerator from './pages/videogenerator.jsx';
-import Generator from './pages/generator.jsx';
+import { initializeApi } from '@/config/api';
+import Home from '@/pages/home';
+import Dashboard from '@/pages/dashboard';
+import VideoClipper from '@/pages/videoclipper';
+import Login from '@/pages/login';
+import Analytics from '@/pages/analytics';
+import Settings from '@/pages/settings';
+import NotFound from '@/pages/notfound';
+import VideoGenerator from '@/pages/videogenerator';
+import Generator from '@/pages/generator';
 
 // Create placeholder components for missing pages
 const AdvancedVideoGenerator = () => (

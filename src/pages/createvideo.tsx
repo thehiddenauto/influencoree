@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import DashboardNavbar from '@/components/DashboardNavbar';
+import DashboardNavbar from '@/components/dashboardnavbar';
 
 const CreateVideo = () => {
   const [isGenerating, setIsGenerating] = useState(false);

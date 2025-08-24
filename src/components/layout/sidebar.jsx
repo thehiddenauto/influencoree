@@ -9,7 +9,7 @@ import {
   VideoIcon,
   X
 } from 'lucide-react';
-import { AppContext } from '../../app';
+import { AppContext } from '@/app';
 
 const Sidebar = ({ mobile = false }) => {
   const { setSidebarOpen } = useContext(AppContext);

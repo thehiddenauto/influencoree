@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
-import { useAuthContext } from '@/components/auth/AuthProvider'
-import { ThemeToggle } from '@/components/theme/ThemeToggle'
+import { useAuthContext } from '@/components/auth/authprovider'
+import { ThemeToggle } from '@/components/theme/themetoggle'
 import { LogOut, User } from 'lucide-react'
 import { toast } from '@/hooks/use-toast'
 

@@ -16,8 +16,8 @@ import {
   Clock,
   Zap
 } from 'lucide-react';
-import { AppContext } from '../app.jsx';
-import { apiCall } from '../config/api.js';
+import { AppContext } from '@/app';
+import { apiCall } from '@/config/api';
 
 const VideoGenerator = () => {
   const [searchParams] = useSearchParams();
