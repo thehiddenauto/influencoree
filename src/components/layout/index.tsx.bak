@@ -1,9 +1,9 @@
-import Navbar from 'src/components/navbar';
-import Hero from 'src/components/hero';
-import Features from 'src/components/features';
-import Pricing from 'src/components/pricing';
-import BackendStatus from 'src/components/backendstatus';
-import { Card, CardContent, CardHeader, CardTitle } from 'src/components/ui/card';
+import Navbar from '@/components/navbar';
+import Hero from '@/components/hero';
+import Features from '@/components/features';
+import Pricing from '@/components/pricing';
+import BackendStatus from '@/components/backendstatus';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Index = () => {
   return (

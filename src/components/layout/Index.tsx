@@ -1,8 +1,8 @@
-import Navbar from '@/components/navbar';
-import Hero from '@/components/hero';
-import Features from '@/components/features';
-import Pricing from '@/components/pricing';
-import BackendStatus from '@/components/backendstatus';
+﻿import Navbar from '@/components/navbar';
+import Hero from '@/components/Hero';
+import Features from '@/components/Features';
+import Pricing from '@/components/Pricing';
+import BackendStatus from '@/components/BackendStatus';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Index = () => {
@@ -31,3 +31,4 @@ const Index = () => {
 };
 
 export default Index;
+
