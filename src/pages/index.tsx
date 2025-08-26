@@ -1,9 +1,16 @@
-import React from 'react'
-import { useAuthContext } from '@/components/auth/authprovider'
-import { LoginForm } from '@/components/auth/loginform'
-import { Dashboard } from '@/components/dashboard/dashboard'
-import { Navbar } from '@/components/layout/navbar'
-import { Skeleton } from '@/components/ui/skeleton'
+import Hero from './hero'
+import Features from './features'
+import Pricing from './pricing'
+import BackendStatus from './backendstatus'
+import Navbar from './navbar'
+
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
+
+// Missing imports added:
+import { useAuthContext } from '@/context/AuthContext'
+import { Skeleton } from './ui/skeleton'
+import LoginForm from './auth/LoginForm'
+import Dashboard from './dashboard'
 
 const Index = () => {
   const { isAuthenticated, loading } = useAuthContext()
@@ -31,4 +38,4 @@ const Index = () => {
   )
 }
 
-export default Index;
+export default Index

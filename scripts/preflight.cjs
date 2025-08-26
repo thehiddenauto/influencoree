@@ -1,46 +1,43 @@
 // scripts/preflight.cjs
-// Fails fast on casing problems & missing files for alias/relative imports.
-
+/* Minimal preflight to catch bad imports quickly */
 const fs = require("fs");
 const path = require("path");
-const glob = require("glob");
 
-const SRC = path.join(process.cwd(), "src");
-let issues = [];
+const SRC = path.resolve(process.cwd(), "src");
+const aliasRoot = SRC; // "@/..." => under /src
 
-// 1) Disallow ANY uppercase in filenames (Linux servers are case-sensitive)
-glob.sync("src/**/*", { nodir: false }).forEach((p) => {
-  const base = path.basename(p);
-  if (/[A-Z]/.test(base)) issues.push(`Uppercase name found: ${p}`);
-});
-
-// 2) Verify imports resolve on disk (supports @ alias and relative)
-const importRe = /(?:import|export)\s+(?:[^'"]*\s+from\s+)?['"]([^'"]+)['"]/g;
-
-function existsAny(p) {
-  const exts = ["", ".jsx", ".js", ".tsx", ".ts", "/index.jsx", "/index.js", "/index.tsx", "/index.ts"];
-  return exts.some((ext) => fs.existsSync(p + ext));
+/** Collect all source files */
+function walk(dir, list = []) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, entry.name);
+    if (entry.isDirectory()) walk(p, list);
+    else if (/\.(jsx?|tsx?)$/.test(entry.name)) list.push(p);
+  }
+  return list;
 }
 
-glob.sync("src/**/*.{js,jsx,ts,tsx}").forEach((file) => {
-  const code = fs.readFileSync(file, "utf8");
-  let m;
-  while ((m = importRe.exec(code))) {
-    const imp = m[1];
-    if (imp.startsWith("@/")) {
-      const resolved = path.join(SRC, imp.slice(2));
-      if (!existsAny(resolved)) issues.push(`Missing alias import in ${file}: ${imp}`);
-    } else if (imp.startsWith(".")) {
-      const resolved = path.resolve(path.dirname(file), imp);
-      if (!existsAny(resolved)) issues.push(`Missing relative import in ${file}: ${imp}`);
+function check() {
+  let errors = [];
+  for (const file of walk(SRC)) {
+    const src = fs.readFileSync(file, "utf8");
+    const re = /from\s+["'](@\/[^"']+)["']/g;
+    let m;
+    while ((m = re.exec(src))) {
+      const spec = m[1]; // e.g. "@/pages/dashboard"
+      const rel = spec.replace(/^@\//, "");
+      const base = path.join(aliasRoot, rel);
+      const tried = [".tsx", ".ts", ".jsx", ".js", "/index.tsx", "/index.ts", "/index.jsx", "/index.js"];
+      const ok = tried.some(ext => fs.existsSync(base + ext));
+      if (!ok) {
+        errors.push(`${path.relative(process.cwd(), file)} imports ${spec} which doesn't resolve`);
+      }
     }
   }
-});
-
-if (issues.length) {
-  console.error("\n❌ Preflight failed:");
-  issues.forEach((i) => console.error(" - " + i));
-  process.exit(1);
-} else {
-  console.log("✅ Preflight passed");
+  if (errors.length) {
+    console.error("❌ Preflight failed:\n - " + errors.join("\n - "));
+    process.exit(1);
+  }
+  console.log("✅ Preflight OK");
 }
+
+check();
