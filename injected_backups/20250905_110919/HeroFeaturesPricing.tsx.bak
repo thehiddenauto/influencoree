@@ -1,0 +1,164 @@
+﻿import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"; // adjust import path if needed
+import { Button } from "./ui/button";
+import { Camera, Sparkles, Users, Play } from "lucide-react";
+import { motion } from "framer-motion";
+
+const features = [
+  {
+    title: "Text & Voice to Video",
+    desc: "Turn prompts or voice recordings into short-form videos with customizable scenes.",
+    icon: Camera,
+  },
+  {
+    title: "Media Library",
+    desc: "Manage images, clips and audio — all ready to drop into timelines or templates.",
+    icon: Users,
+  },
+  {
+    title: "Team Collaboration",
+    desc: "Invite teammates, share drafts and manage assets for faster iteration.",
+    icon: Sparkles,
+  },
+];
+
+export default function HeroFeaturesPricing(): JSX.Element {
+  return (
+    <div className="min-h-screen bg-bg text-text">
+      {/* HERO */}
+      <motion.section
+        className="container max-w-6xl mx-auto px-6 py-16 flex flex-col-reverse lg:flex-row items-center gap-12"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45 }}
+      >
+        <div className="w-full lg:w-1/2">
+          <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
+            AI-Powered Video Generation
+          </h1>
+          <p className="mt-4 text-lg max-w-xl">
+            Transform your text and voice into engaging short-form videos for any
+            platform — fast, brand-consistent, and scalable.
+          </p>
+
+          <div className="mt-6 flex flex-col sm:flex-row gap-3">
+            <Button className="bg-brand hover:bg-brand-hover text-white">
+              Start a Free Trial
+            </Button>
+            <Button variant="outline" className="border-surface">
+              View Pricing
+            </Button>
+          </div>
+
+          <div className="mt-6 grid grid-cols-2 gap-3 text-sm text-muted-foreground">
+            <div className="flex items-center gap-3">
+              <Play className="w-5 h-5" />
+              <div>
+                <div className="font-medium">Sample Video</div>
+                <div className="text-xs">WebM, 720p</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Camera className="w-5 h-5" />
+              <div>
+                <div className="font-medium">Sample Voice</div>
+                <div className="text-xs">MP3, 44.1kHz</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full lg:w-1/2 flex justify-center">
+          <div className="w-full max-w-md rounded-2xl shadow-elev-2 overflow-hidden bg-surface">
+            <video
+              src="/assets/video-sample.webm"
+              controls
+              className="w-full h-auto bg-black"
+            />
+            <div className="p-4">
+              <div className="font-semibold">Live demo</div>
+              <div className="text-sm text-muted-foreground">Preview generated output</div>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* FEATURES */}
+      <section className="container max-w-6xl mx-auto px-6 py-12">
+        <h2 className="text-2xl font-semibold">Key Features</h2>
+        <p className="mt-2 text-muted-foreground max-w-2xl">
+          Everything you need to go from idea to shareable short-form video.
+        </p>
+
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {features.map((f) => {
+            const Icon = f.icon;
+            return (
+              <Card key={f.title} className="bg-surface">
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-brand/10">
+                      <Icon className="w-6 h-6 text-brand" />
+                    </div>
+                    <CardTitle className="text-base">{f.title}</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">{f.desc}</p>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* PRICING */}
+      <section className="container max-w-6xl mx-auto px-6 py-16">
+        <h2 className="text-2xl font-semibold">Pricing</h2>
+        <p className="mt-2 text-muted-foreground max-w-2xl">Simple pricing for teams of any size.</p>
+
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-2xl p-6 bg-surface shadow-elev-1 border border-border">
+            <div className="flex items-baseline justify-between">
+              <div>
+                <div className="text-lg font-semibold">Freemium</div>
+                <div className="text-3xl font-bold mt-2">Free</div>
+              </div>
+              <div className="text-sm text-muted-foreground">For personal use &amp; experimentation</div>
+            </div>
+
+            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+              <li>Up to 5 exports / month</li>
+              <li>Watermarked output</li>
+              <li>Basic templates</li>
+            </ul>
+
+            <div className="mt-6">
+              <Button className="w-full">Get started</Button>
+            </div>
+          </div>
+
+          <div className="rounded-2xl p-6 bg-brand text-white shadow-elev-2 border border-brand/60">
+            <div className="flex items-baseline justify-between">
+              <div>
+                <div className="text-lg font-semibold">Pro</div>
+                <div className="text-3xl font-bold mt-2">$19 / mo</div>
+              </div>
+              <div className="text-sm text-white/90">Best for creators &amp; small teams</div>
+            </div>
+
+            <ul className="mt-4 space-y-2 text-sm">
+              <li>Unlimited exports</li>
+              <li>Brand presets &amp; custom fonts</li>
+              <li>Priority render queue</li>
+            </ul>
+
+            <div className="mt-6">
+              <Button className="w-full bg-white text-brand hover:opacity-95">Start 7-day trial</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
